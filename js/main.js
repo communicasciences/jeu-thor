@@ -22,7 +22,8 @@ var config = {
 };
 
 var space;
-var move = 0;
+var bond = 20;
+var nouvxDeplacmnt = 0;
 var tresor;
 var score = 0;
 var scoreText;
@@ -72,11 +73,16 @@ function update() {
     }
 
     //déplacement du joueur
-    if (space.isDown && move == 0) {
-        joueur.x = joueur.x + 20;
-        move = 1;
-    } else if (space.isUp) {
-        move = 0;
+    if (space.isDown && bond == 20 && nouvxDeplacmnt == 0) {
+        bond = 0;
+        nouvxDeplacmnt = 1;
+    }
+    if (bond < 20) {
+        joueur.x = joueur.x + 1;
+        bond = bond + 1;
+    }
+    if (space.isUp) {
+        nouvxDeplacmnt = 0;
     }
 
     //déplacement du dragon
@@ -87,8 +93,6 @@ function update() {
         dragon.direction += 1;
     }
     dragon.y += dragon.direction;
-
-
 }
 
 function getTresor(joueur, tresor) {
