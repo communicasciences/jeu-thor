@@ -22,7 +22,10 @@ var config = {
 };
 
 var space;
-var move = 0
+var move = 0;
+var tresor;
+var score = 0;
+var scoreText;
 
 var game = new Phaser.Game(config);
 
@@ -44,7 +47,7 @@ function create() {
     joueur.setCollideWorldBounds(true);
 
     //ajout du trésor
-    this.add.image(725, 145, 'tresor').setScale(0.7);
+    tresor = this.physics.add.image(725, 300, 'tresor').setScale(0.7);
 
     //ajout du dragon
     dragon = this.add.image(500, 120, 'dragon').setScale(0.7);
@@ -66,6 +69,9 @@ function create() {
     //gestion des entrées de l'utilisateur
     space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
+    this.physics.add.overlap(joueur, tresor, getTresor, null, this);
+
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#FFF' });
 }
 
 function update() {
@@ -111,4 +117,13 @@ function update() {
             }
             child.y += child.direction;
 });
+}
+
+function getTresor(joueur, tresor) {
+
+    tresor.disableBody(true, true);
+    score += 10;
+    scoreText.setText('Score: ' + score);
+
+    console.log('cousous')
 }
