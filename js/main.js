@@ -62,7 +62,9 @@ function create() {
 
         child.setScale(0.7)
         child.flipX = true;
-        child.direction = 1;;
+        child.direction = 1;
+        child.y = Phaser.Math.Between(80,520);
+        ;
     
     });
 
