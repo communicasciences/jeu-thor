@@ -2,37 +2,35 @@ var scene = new Phaser.Scene("jeu");
 var joueur;
 var dragon;
 var config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-
-        physics: {
-                default: 'arcade',
-                arcade: {
-                        debug: false
-                }
-        },
-
-        scene: {
-                preload: preload,
-                create: create,
-                update: update,
-        },
-        scale: {
-                autoCenter: Phaser.Scale.Center.CENTER_BOTH,
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: false
         }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update,
+    },
+    scale: {
+        autoCenter: Phaser.Scale.Center.CENTER_BOTH,
+    }
 };
 
 var space;
-var joueur;
+var move = 0
 
 var game = new Phaser.Game(config);
 
 function preload() {
-        this.load.image('player', 'assets/player.png');
-        this.load.image('background', 'assets/background.png');
-        this.load.image('tresor', 'assets/treasure.png');
-        this.load.image('dragon', 'assets/dragon.png');
+    this.load.image('player', 'assets/player.png');
+    this.load.image('background', 'assets/background.png');
+    this.load.image('tresor', 'assets/treasure.png');
+    this.load.image('dragon', 'assets/dragon.png');
 }
 
 function create() {
@@ -45,23 +43,23 @@ function create() {
         dragon.direction = 1;
 
 
+    joueur.setCollideWorldBounds(true);
 
-        joueur.setCollideWorldBounds(true);
-
-        space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
 }
 
 function update() {
         if (joueur.x > dragon.x) {
-                dragon.flipX = false
-
-        } else {
-                dragon.flipX = true
+                dragon.flipX = false;
+        }
+         else {
+        dragon.flipX = true;
         }
 
-        if (space.isDown) {
-                joueur.setVelocityX(100);
+        if (space.isDown && move == 0 ) {
+            joueur.x = joueur.x + 20;
+            move = 1;
         }
         else joueur.setVelocityX(0);
         if (dragon.y > 520) {
@@ -75,4 +73,7 @@ function update() {
 
         dragon.y += dragon.direction;
 
+        else if (space.isUp) {
+            move = 0;
+        };
 }
