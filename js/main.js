@@ -27,7 +27,7 @@ function preload ()
 function create ()
 {
     this.add.image(400, 300, 'background');
-    this.add.image(720, 150, 'tresor');
+    this.add.image(725, 145, 'tresor').setScale(0.7).refreshBody();
 }
 
 function update ()
