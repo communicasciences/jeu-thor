@@ -23,7 +23,7 @@ var config = {
 
 var space;
 var distance = 110;
-var pas = 2.5; // selon la valeur de pas par rapport à la valeur de distance, il peut y avoir un bug, auquel cas le personage n'avance qu'une seule fois
+var pas = 2.5;
 var bond = distance;
 var nouvxDeplacmnt = 0;
 var tresor;
