@@ -22,7 +22,9 @@ var config = {
 };
 
 var space;
-var bond = 20;
+var distance = 110;
+var pas = 2.5; // selon la valeur de pas par rapport à la valeur de distance, il peut y avoir un bug, auquel cas le personage n'avance qu'une seule fois
+var bond = distance;
 var nouvxDeplacmnt = 0;
 var tresor;
 var score = 0;
@@ -43,7 +45,7 @@ function create() {
     this.add.image(400, 300, 'background');
 
     //ajout du joueur
-    joueur = this.physics.add.image(20, 300, 'player');
+    joueur = this.physics.add.image(105, 300, 'player');
     joueur.setScale(0.7);
     joueur.setCollideWorldBounds(true);
 
@@ -84,13 +86,13 @@ function create() {
 
 function update() {
     //déplacement du joueur
-    if (space.isDown && bond == 20 && nouvxDeplacmnt == 0) {
+    if (space.isDown && bond == distance && nouvxDeplacmnt == 0) {
         bond = 0;
         nouvxDeplacmnt = 1;
     }
-    if (bond < 20) {
-        joueur.x = joueur.x + 1;
-        bond = bond + 1;
+    if (bond < distance) {
+        joueur.x = joueur.x + pas;
+        bond = bond + pas;
     }
     if (space.isUp) {
         nouvxDeplacmnt = 0;
