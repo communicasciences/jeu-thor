@@ -50,6 +50,18 @@ function create() {
     dragon = this.add.image(500, 120, 'dragon').setScale(0.7);
     dragon.flipX = true;
     dragon.direction = 1;
+    dragons = this.add.group({
+        key: 'dragon',
+        repeat: 4,
+        setXY: { x: 600, y: 100, stepX: -100 }
+    });
+    dragons.children.iterate(function (child) {
+
+        child.setScale(0.7)
+        child.flipX = true;
+        child.direction = 1;;
+    
+    });
 
     //gestion des entrées de l'utilisateur
     space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -82,5 +94,21 @@ function update() {
     }
     dragon.y += dragon.direction;
 
+    //groupe de dragons
+    dragons.children.iterate(function (child) {
+        if (joueur.x > child.x) {
+                child.flipX = false;
+            }
+            else {
+                child.flipX = true;
+            }
 
+            if (child.y > 520) {
+                child.direction += -1;
+            }
+            if (child.y < 80) {
+                child.direction += 1;
+            }
+            child.y += child.direction;
+});
 }
