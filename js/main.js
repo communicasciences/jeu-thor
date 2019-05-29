@@ -82,11 +82,11 @@ function create() {
 
 function update() {
     //déplacement du joueur
-    if (space.isDown && bond == distance && nouvxDeplacmnt == 0) {
+    if (space.isDown && bond >= (distance/2) && nouvxDeplacmnt == 0) {
         bond = 0;
         nouvxDeplacmnt = 1;
     }
-    if (bond < distance) {
+    if (bond < (distance/2)) {
         joueur.x = joueur.x + pas;
         bond = bond + pas;
     }
