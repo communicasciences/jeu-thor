@@ -50,7 +50,7 @@ function create() {
         tresor = this.physics.add.image(725, 300, 'tresor').setScale(0.7);
 
         //ajout des dragons
-        dragons = this.add.group({
+        dragons = this.physics.add.group({
                 key: 'dragon',
                 repeat: 4,
                 setXY: { x: 600, y: 100, stepX: -110 }
@@ -62,15 +62,16 @@ function create() {
                 child.direction = 1;
                 child.y = Phaser.Math.Between(80, 520);
                 child.direction = Phaser.Math.Between(1, 30) / 10;
-                //        child.direction += Phaser.Math.Between(0,1)
+
                 if (Phaser.Math.Between(0, 1) == 1) {
 
                         child.direction *= -1;
 
                 };
-                ;
-
         });
+        this.physics.add.collider(joueur, dragons, function () {
+                this.scene.start();
+        }, null, this);
 
         //gestion des entrées de l'utilisateur
         space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -106,6 +107,7 @@ function update() {
                 }
                 child.y += child.direction;
         });
+        
 }
 
 function getTresor(joueur, tresor) {
