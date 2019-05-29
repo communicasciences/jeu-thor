@@ -49,10 +49,7 @@ function create() {
         //ajout du trésor
         tresor = this.physics.add.image(725, 300, 'tresor').setScale(0.7);
 
-        //ajout du dragon
-        //dragon = this.add.image(500, 120, 'dragon').setScale(0.7);
-        //dragon.flipX = true;
-        //dragon.direction = 1;
+        //ajout des dragons
         dragons = this.add.group({
                 key: 'dragon',
                 repeat: 4,
@@ -84,14 +81,6 @@ function create() {
 }
 
 function update() {
-        //le dragon regarde toujours le joueur
-        /*  if (joueur.x > dragon.x) {
-              dragon.flipX = false;
-          }
-          else {
-              dragon.flipX = true;
-          }
-      */
         //déplacement du joueur
         if (space.isDown && move == 0) {
                 joueur.x = joueur.x + 20;
@@ -100,15 +89,6 @@ function update() {
                 move = 0;
         }
 
-        //déplacement du dragon
-        /*  if (dragon.y > 520) {
-              dragon.direction += -1;
-          }
-          if (dragon.y < 80) {
-              dragon.direction += 1;
-          }
-          dragon.y += dragon.direction;
-      */
         //groupe de dragons
         dragons.children.iterate(function (child) {
                 if (joueur.x > child.x) {
@@ -134,5 +114,4 @@ function getTresor(joueur, tresor) {
         score += 10;
         scoreText.setText('Score: ' + score);
 
-        console.log('cousous')
 }
