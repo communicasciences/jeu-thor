@@ -50,13 +50,13 @@ function create() {
     tresor = this.physics.add.image(725, 300, 'tresor').setScale(0.7);
 
     //ajout du dragon
-    dragon = this.add.image(500, 120, 'dragon').setScale(0.7);
-    dragon.flipX = true;
-    dragon.direction = 1;
+    //dragon = this.add.image(500, 120, 'dragon').setScale(0.7);
+    //dragon.flipX = true;
+    //dragon.direction = 1;
     dragons = this.add.group({
         key: 'dragon',
         repeat: 4,
-        setXY: { x: 600, y: 100, stepX: -100 }
+        setXY: { x: 600, y: 100, stepX: -110 }
     });
     dragons.children.iterate(function (child) {
 
@@ -76,13 +76,13 @@ function create() {
 
 function update() {
     //le dragon regarde toujours le joueur
-    if (joueur.x > dragon.x) {
+  /*  if (joueur.x > dragon.x) {
         dragon.flipX = false;
     }
     else {
         dragon.flipX = true;
     }
-
+*/
     //déplacement du joueur
     if (space.isDown && move == 0) {
         joueur.x = joueur.x + 20;
@@ -92,14 +92,14 @@ function update() {
     }
 
     //déplacement du dragon
-    if (dragon.y > 520) {
+  /*  if (dragon.y > 520) {
         dragon.direction += -1;
     }
     if (dragon.y < 80) {
         dragon.direction += 1;
     }
     dragon.y += dragon.direction;
-
+*/
     //groupe de dragons
     dragons.children.iterate(function (child) {
         if (joueur.x > child.x) {
