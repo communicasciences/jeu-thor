@@ -22,7 +22,10 @@ var config = {
 };
 
 var space;
-var move = 0
+var move = 0;
+var tresor;
+var score = 0;
+var scoreText;
 
 var game = new Phaser.Game(config);
 
@@ -37,29 +40,44 @@ function create() {
     this.add.image(400, 300, 'background');
     joueur = this.physics.add.image(20, 300, 'player');
     joueur.setScale(0.7);
-    this.add.image(725, 300, 'tresor').setScale(0.7);
+    joueur.setCollideWorldBounds(true);
+
+    tresor = this.physics.add.image(725, 300, 'tresor').setScale(0.7);
+
     dragon = this.add.image(500, 120, 'dragon').setScale(0.7);
     dragon.flipX = true;
 
-    joueur.setCollideWorldBounds(true);
-
     space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
+    this.physics.add.overlap(joueur, tresor, getTresor, null, this);
+
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#FFF' });
 }
 
 function update() {
-        if (joueur.x > dragon.x) {
+    if (joueur.x > dragon.x) {
                 dragon.flipX = false;
-        }
-         else {
-        dragon.flipX = true;
-        }
+    }
+    else {
+    dragon.flipX = true;
+    }
 
-        if (space.isDown && move == 0 ) {
-            joueur.x = joueur.x + 20;
-            move = 1;
-        }
-        else if (space.isUp) {
-            move = 0;
-        };
+    if (space.isDown && move == 0 ) {
+        joueur.x = joueur.x + 20;
+        move = 1;
+    }
+    else if (space.isUp) {
+        move = 0;
+    };
+
+    
+}
+
+function getTresor(joueur, tresor) {
+
+    tresor.disableBody(true, true);
+    score += 10;
+    scoreText.setText('Score: ' + score);
+
+    console.log('cousous')
 }
