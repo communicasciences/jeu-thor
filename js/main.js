@@ -97,5 +97,4 @@ function getTresor(joueur, tresor) {
     score += 10;
     scoreText.setText('Score: ' + score);
 
-    console.log('cousous')
 }
