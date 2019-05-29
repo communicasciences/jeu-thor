@@ -42,6 +42,7 @@ function create() {
         this.add.image(725, 145, 'tresor').setScale(0.7);
         dragon = this.add.image(500, 120, 'dragon').setScale(0.7);
         dragon.flipX = true;
+        dragon.direction = 1;
 
 
 
@@ -56,11 +57,22 @@ function update() {
                 dragon.flipX = false
 
         } else {
-        dragon.flipX = true
+                dragon.flipX = true
         }
 
         if (space.isDown) {
                 joueur.setVelocityX(100);
         }
         else joueur.setVelocityX(0);
+        if (dragon.y > 520) {
+                dragon.direction += -1;
+        }
+
+ 
+        if (dragon.y < 80) {
+                dragon.direction += 1;
+        }
+
+        dragon.y += dragon.direction;
+
 }
