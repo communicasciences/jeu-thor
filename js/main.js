@@ -40,7 +40,6 @@ function create() {
         joueur = this.physics.add.image(20, 300, 'player');
         joueur.setScale(0.7);
         this.add.image(725, 145, 'tresor').setScale(0.7);
-        ;
         dragon = this.add.image(500, 120, 'dragon').setScale(0.7);
         dragon.flipX = true;
 
