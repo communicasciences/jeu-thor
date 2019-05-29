@@ -4,7 +4,6 @@ var config = {
     type: Phaser.AUTO,
     width:800,
     height:600,
-
     scene: {
         preload : preload,
         create : create,
@@ -20,19 +19,16 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     
-        this.load.image('player', 'assets/player.png');
-        
-
+    this.load.image('player', 'assets/player.png');
     this.load.image('background', 'assets/background.png');
     this.load.image('tresor', 'assets/treasure.png');
-
 }
 
 function create ()
 {
-        this.add.image(400, 300, 'background');
-        var joueur = this.add.image(20, 300, 'player');
-        joueur.setScale (0.7);
+    this.add.image(400, 300, 'background');
+    var joueur = this.add.image(20, 300, 'player');
+    joueur.setScale (0.7);
     this.add.image(725, 145, 'tresor').setScale(0.7);
 }
 
