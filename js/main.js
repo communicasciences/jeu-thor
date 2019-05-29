@@ -9,6 +9,9 @@ var config = {
         preload : preload,
         create : create,
         update: update,
+    },
+    scale:{
+        autoCenter:Phaser.Scale.Center.CENTER_BOTH,
     }
 };
 
