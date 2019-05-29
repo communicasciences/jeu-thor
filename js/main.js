@@ -34,46 +34,53 @@ function preload() {
 }
 
 function create() {
-        this.add.image(400, 300, 'background');
-        joueur = this.physics.add.image(20, 300, 'player');
-        joueur.setScale(0.7);
-        this.add.image(725, 145, 'tresor').setScale(0.7);
-        dragon = this.add.image(500, 120, 'dragon').setScale(0.7);
-        dragon.flipX = true;
-        dragon.direction = 1;
 
+    //ajout du background
+    this.add.image(400, 300, 'background');
 
+    //ajout du joueur
+    joueur = this.physics.add.image(20, 300, 'player');
+    joueur.setScale(0.7);
     joueur.setCollideWorldBounds(true);
 
+    //ajout du trésor
+    this.add.image(725, 145, 'tresor').setScale(0.7);
+
+    //ajout du dragon
+    dragon = this.add.image(500, 120, 'dragon').setScale(0.7);
+    dragon.flipX = true;
+    dragon.direction = 1;
+
+    //gestion des entrées de l'utilisateur
     space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
 }
 
 function update() {
-        if (joueur.x > dragon.x) {
-                dragon.flipX = false;
-        }
-         else {
+    //le dragon regarde toujours le joueur
+    if (joueur.x > dragon.x) {
+        dragon.flipX = false;
+    }
+    else {
         dragon.flipX = true;
-        }
+    }
 
-        if (space.isDown && move == 0 ) {
-            joueur.x = joueur.x + 20;
-            move = 1;
-        }
-        else joueur.setVelocityX(0);
-        if (dragon.y > 520) {
-                dragon.direction += -1;
-        }
+    //déplacement du joueur
+    if (space.isDown && move == 0) {
+        joueur.x = joueur.x + 20;
+        move = 1;
+    } else if (space.isUp) {
+        move = 0;
+    }
 
- 
-        if (dragon.y < 80) {
-                dragon.direction += 1;
-        }
+    //déplacement du dragon
+    if (dragon.y > 520) {
+        dragon.direction += -1;
+    }
+    if (dragon.y < 80) {
+        dragon.direction += 1;
+    }
+    dragon.y += dragon.direction;
 
-        dragon.y += dragon.direction;
 
-        else if (space.isUp) {
-            move = 0;
-        };
 }
