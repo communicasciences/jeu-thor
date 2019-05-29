@@ -24,7 +24,7 @@ var config = {
 };
 
 var space;
-var joueur;
+var move = 0
 
 var game = new Phaser.Game(config);
 
@@ -53,14 +53,17 @@ function create() {
 
 function update() {
         if (joueur.x > dragon.x) {
-                dragon.flipX = false
-
-        } else {
-        dragon.flipX = true
+                dragon.flipX = false;
+        }
+         else {
+        dragon.flipX = true;
         }
 
-        if (space.isDown) {
-                joueur.setVelocityX(100);
+        if (space.isDown && move == 0 ) {
+            joueur.x = joueur.x + 20;
+            move = 1;
         }
-        else joueur.setVelocityX(0);
+        else if (space.isUp) {
+            move = 0;
+        };
 }
