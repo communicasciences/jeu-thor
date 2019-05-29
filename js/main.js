@@ -1,5 +1,6 @@
 var scene = new Phaser.Scene ("jeu");
-
+var joueur;
+var dragon;
 var config = {
     type: Phaser.AUTO,
     width:800,
@@ -28,13 +29,19 @@ function preload ()
 function create ()
 {
     this.add.image(400, 300, 'background');
-    var joueur = this.add.image(20, 300, 'player');
+    joueur = this.add.image(520, 300, 'player');
     joueur.setScale (0.7);
     this.add.image(725, 145, 'tresor').setScale(0.7);
-    this.add.image(500, 120, 'dragon').setScale(0.7);
+;
+     dragon =     this.add.image(500, 120, 'dragon').setScale(0.7);
+    dragon.flipX = true;
 }
 
 function update ()
 {
-
+if (joueur.x > dragon.x) {
+        dragon.flipX = false
+        
+}else {dragon.flipX = true
+}
 }
