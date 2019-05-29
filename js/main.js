@@ -5,6 +5,13 @@ var config = {
     width:800,
     height:600,
 
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: false
+        }
+    },
+
     scene: {
         preload : preload,
         create : create,
@@ -15,14 +22,15 @@ var config = {
     }
 };
 
+var space;
+var joueur;
+
 var game = new Phaser.Game(config);
 
 function preload ()
 {
-    
-        this.load.image('player', 'assets/player.png');
+    this.load.image('player', 'assets/player.png');
         
-
     this.load.image('background', 'assets/background.png');
     this.load.image('tresor', 'assets/treasure.png');
 
@@ -30,13 +38,23 @@ function preload ()
 
 function create ()
 {
-        this.add.image(400, 300, 'background');
-        var joueur = this.add.image(20, 300, 'player');
-        joueur.setScale (0.7);
+    this.add.image(400, 300, 'background');
+
+    joueur = this.physics.add.image(20, 300, 'player');
+    joueur.setScale (0.7);
     this.add.image(725, 145, 'tresor').setScale(0.7);
+
+    joueur.setBounce(0.2);
+    joueur.setCollideWorldBounds(true);
+
+    space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 }
 
 function update ()
 {
-
+    if (space.isDown)
+    {
+        joueur.setVelocityX(100);
+    }
+    else  joueur.setVelocityX(0);
 }
